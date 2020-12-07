@@ -105,4 +105,9 @@ begin
   Item.new('bread', 2.17)
   SaleItem.new('milk', 2, 5.00)
   SaleItem.new('bread', 3, 6.00)
+  
+  
+  
+  price_calculator = PriceCalculator.new
+  price_calculator.generate_bill
 end
