@@ -69,7 +69,32 @@ class PriceCalculator
     return summary
   end
 
+def bill_display(items_quantity, bill_summary)
+    purchased_products  = {}
+    total_bill_price    = 0.0
+    actual_total_price  = 0.0
 
+    items_quantity.each do |product, no_of_items|
+      purchased_products[product] ||= {
+        units: no_of_items, 
+        price: bill_summary[product]
+      }
+      total_bill_price    += bill_summary[product]
+      actual_total_price  += (no_of_items * Item.all[product])
+    end
+
+    money_saved = (actual_total_price - total_bill_price).round(3)
+
+    puts "Item      Quantity       Price"
+    puts "--------------------------------------"
+    purchased_products.each do | item, detail|
+      puts "#{item}            #{detail[:units]}            #{detail[:price]}" 
+    end
+    puts "Total price : $#{total_bill_price}"
+    puts "You saved $#{money_saved} today."
+  end
+
+end
 
 
 
